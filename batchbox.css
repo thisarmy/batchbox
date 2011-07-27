@@ -22,6 +22,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 input, textarea, select {margin: 0;}
 
+input.quantity,
+input.price {text-align: right;}
 input.placeholder {font-size: 10px; color: #ccc;}
 
 input[type=text], textarea, select {
@@ -61,6 +63,7 @@ input:focus, textarea:focus, select:focus {outline: none; background-color: #ffc
 body {background-color: #eee; color: #333; font-family: helvetica, sans-serif; font-size: 14px; padding: 4em;}
 h1 {padding: 20px 14px; font-size: 14px; background-color: #f2f2f2; border-top: 1px solid #fff; border-bottom: 1px solid #fff; text-shadow: #fff 1px 1px 0;}
 h2 {margin-bottom: 15px;}
+#products h2 {margin-top: 20px;}
 form {border: 1px solid #ccc; max-width: 600px;
 -moz-box-shadow: 0 2px 5px #CCC;
 -webkit-box-shadow: 0 2px 5px #CCC;
@@ -78,6 +81,8 @@ table.empty-batchbox {border-top: none;}
 .batchbox th,
 .batchbox td {text-align: left; vertical-align: middle;}
 .batchbox th {font-size: 12px; padding: 9px; background-color: #fff; border-bottom: 1px solid #ddd;}
+.batchbox td div {position: relative;}
+.batchbox td label {position: absolute; top: 9px; left: 9px; color: #999;}
 table.empty-batchbox th {border-bottom: none;}
 .batchbox tfoot td {padding: 5px; padding-left: 0; background-color: #fff;}
 .batchbox td:last-child {padding-right: 0;}

@@ -10,6 +10,7 @@
 <script>
 $(document).ready(function() {
     var settings = {
+        name: "batchboxNotify",
         fields: [{name: 'name'}, {name: 'email'}],
         deleteLabel: 'x',
         sortable: true,
@@ -19,16 +20,37 @@ $(document).ready(function() {
         {name: 'Alan Alston', email: 'alan.alston@test.com'},
         {name: 'Le Roux Bodenstein', email: 'lerouxb@example.com'}
     ];
-    $('#options').batchbox(settings, data);
-    $('#batchbox').bind('batchbox:add', function(event, $tr, $data) {
-        console.log(event.type, $tr, $data);
+    $('#notify').batchbox(settings, data);
+    $('#batchboxNotify').bind('batchbox:add', function(event, $tr, $data) {
+        $("#batchboxNotify tfoot input:first").focus();
     });
-    $('#batchbox').bind('batchbox:delete', function(event, $tr) {
-        console.log(event.type, $tr);
+    $('#batchboxNotify').bind('batchbox:delete', function(event, $tr) {
+    });
+
+    var settings = {
+        name: "batchboxProducts",
+        fields: [{name: 'name'},
+                 {name: 'price', label: '$'},
+                 {name: 'sku'},
+                 {name: 'quantity', placeholder: '# in stock'}],
+        deleteLabel: 'x',
+        sortable: true,
+        headings: false,
+    };
+    var data = [
+        {name: "Puppy", price: "100.00", sku: "droolrs01", quantity: "10"},
+        {name: "Kitten", price: "10.00", sku: "frblls02", quantity: "10"},
+    ];
+    $('#products').batchbox(settings, data);
+    $('#batchboxProducts').bind('batchbox:add', function(event, $tr, $data) {
+        $("#batchboxProducts tfoot input:first").focus();
+    });
+    $('#batchboxProducts').bind('batchbox:delete', function(event, $tr) {
     });
 
     $('#batchboxform').submit(function() {
-        alert($('#batchbox').batchbox('serialize'));
+        alert($('#batchboxNotify').batchbox('serialize'));
+        alert($('#batchboxProducts').batchbox('serialize'));
         return false;
     });
 });
@@ -40,8 +62,13 @@ $(document).ready(function() {
 <h1>BatchBox</h1>
 <div class="fields">
 
-<div id="options">
+<div id="notify">
 <h2>Notify these people</h2>
+<!-- the batchbox will go here. -->
+</div>
+
+<div id="products">
+<h2>Here are my products</h2>
 <!-- the batchbox will go here. -->
 </div>
 
