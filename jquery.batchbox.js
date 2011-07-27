@@ -20,7 +20,8 @@ $.fn.batchbox = function(options, data) {
             for (var i in settings.fields) {
                 var field = settings.fields[i];
                 var $input = $columns.eq(i).find('input');
-                var placeholder = $.data($input[0], 'placeholderValue');
+                // jquery.placeholder.js support
+                var placeholder = $.data($input.get(0), 'placeholderValue');
                 var value = $input.val();
                 if (placeholder && placeholder === value) {
                     row[field.name] = '';
@@ -126,6 +127,10 @@ $.fn.batchbox = function(options, data) {
         }
         $tr.append($td);
         $tbody.append($tr);
+
+        // jquery.placeholder.js support
+        $tbody.find('tr:last-child input[type=text]').placeholder();
+
         rowNumber += 1;
 
         return $tr;
@@ -197,8 +202,10 @@ $.fn.batchbox = function(options, data) {
     $td.append($add);
     $tr.append($td);
     $tfoot.append($tr);
-
     $container.append($table);
+
+    $container.find('tfoot input[type=text]').placeholder();
+
     if (settings.sortable) {
         /*
         Return a helper with identically sized cells.
@@ -246,7 +253,13 @@ $.fn.batchbox = function(options, data) {
         var row = {};
         for (var name in map) {
             if (map.hasOwnProperty(name)) {
-                row[name] = map[name].val();
+                var value = map[name].val();
+                var fld = map[name].get(0);
+                // jquery.placeholder.js serialization support
+                if (value == $.data(fld, 'placeholderValue')) {
+                    value = '';
+                }
+                row[name] = value;
                 // you would check row[name] here and possibly return false
             }
         }
@@ -279,6 +292,10 @@ $.fn.batchbox = function(options, data) {
         // clear
         $tfoot.find('input[type=text]').val('');
 
+        // jquery.placeholder.js support
+        // (is this absolutely necessary?)
+        $tfoot.find('input[type=text]').placeholder('refresh');
+
         toggleEmpty();
 
         return false;
@@ -299,7 +316,6 @@ $.fn.batchbox = function(options, data) {
     });
 
     $table.data('settings', settings);
-    $table.find('input[type=text]').placeholder();
 
     return this;
 };
