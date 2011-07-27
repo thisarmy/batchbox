@@ -106,7 +106,13 @@ $.fn.batchbox = function(options, data) {
                 .attr('placeholder', field.placeholder)
                 .attr('class', field['class'])
                 .val(value);
-            $td.append($input);
+            var $el = $input;
+            if (field.label) {
+                $el = $('<div>');
+                $el.append($('<label>'+field.label+'</label>'));
+                $el.append($input);
+            }
+            $td.append($el);
             $tr.append($td);
         }
         var $td = $('<td class="controls"></td>');
@@ -193,7 +199,13 @@ $.fn.batchbox = function(options, data) {
             .attr('name', settings.name+'-'+field.name)
             .attr('placeholder', field.placeholder)
             .attr('class', field['class']);
-        $td.append($input);
+        var $el = $input;
+        if (field.label) {
+            $el = $('<div>');
+            $el.append($('<label>'+field.label+'</label>'));
+            $el.append($input);
+        }
+        $td.append($el);
         $tr.append($td);
     }
     var $td = $('<td></td>');
