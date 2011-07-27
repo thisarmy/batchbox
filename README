@@ -13,7 +13,7 @@ fields in the same form. (Hence "BatchBox".)
 USAGE
 =====
 
-// each field supports name, placeholder and class
+// each field supports name, placeholder, label and class
 // placeholder and class default to the field name
 var fields = [{name: 'name'}, {name: 'email'}];
 
