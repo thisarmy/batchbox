@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BatchBox</title>
+<link rel="stylesheet" href="batchbox.css">
+<script src="deps/jquery-1.6.1.min.js"></script>
+<script src="deps/jquery-ui-1.8.13.custom.min.js"></script>
+<script src="deps/jquery.placeholder.js"></script>
+<script src="jquery.batchbox.js"></script>
+<script>
+$(document).ready(function() {
+    var settings = {
+        fields: [{name: 'name'}, {name: 'email'}],
+        deleteLabel: 'x',
+        sortable: true,
+        headings: false,
+    };
+    var data = [
+        {name: 'Alan Alston', email: 'alan.alston@test.com'},
+        {name: 'Le Roux Bodenstein', email: 'lerouxb@example.com'}
+    ];
+    $('#options').batchbox(settings, data);
+    $('#batchbox').bind('batchbox:add', function(event, $tr, $data) {
+        console.log(event.type, $tr, $data);
+    });
+    $('#batchbox').bind('batchbox:delete', function(event, $tr) {
+        console.log(event.type, $tr);
+    });
+
+    $('#batchboxform').submit(function() {
+        alert($('#batchbox').batchbox('serialize'));
+        return false;
+    });
+});
+</script>
+</head>
+<body>
+
+<form id="batchboxform" method="post">
+<h1>BatchBox</h1>
+<div class="fields">
+
+<div id="options">
+<h2>Notify these people</h2>
+<!-- the batchbox will go here. -->
+</div>
+
+</div>
+<div class="buttons">
+<input type="submit" name="save" value="Save">
+</div>
+</form>
+
+</body>
+</html>

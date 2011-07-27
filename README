@@ -1,0 +1,48 @@
+BATCHBOX
+========
+
+A jQuery-based widget for managing an array of objects.
+
+Each object's fields are represented by text boxes. The number of fields, name,
+placeholder text and class can be configured. Rows can also be sortable.
+
+The intention is that the whole table gets saved in one go, possibly with other
+fields in the same form. (Hence "BatchBox".)
+
+
+USAGE
+=====
+
+// each field supports name, placeholder and class
+// placeholder and class default to the field name
+var fields = [{name: 'name'}, {name: 'email'}];
+
+var options = {
+    name: 'batchbox',      // becomes the id as well as field name prefix
+    'class': 'batchbox',   // added to the table that's generated
+    fields: fields,        // required array of objects
+    addLabel: 'add',       // value="" for the single add button
+    handleLabel: '&nbsp;', // for the <span class="handle"></span> contents
+    deleteLabel: 'delete', // for the <span class="delete"></span> contents
+    headings: false,       // also add a thead at the start
+    sortable: true,        // add handles and invoke .sortable() on tbody
+    validate: null         // see defaultValidate in the code
+};
+
+// data is optional
+var data = [
+    {name: 'Alan Alston', email: 'alan.alston@test.com'},
+    {name: 'Le Roux Bodenstein', email: 'lerouxb@example.com'}
+];
+
+// append the batchbox to #container
+$('#container').batchbox(options, data);
+
+// serialize the batchbox as an array of [{fieldname: value}]
+var json = $('#batchbox').batchbox('serialize');
+
+
+EXAMPLE
+=======
+
+See test.html

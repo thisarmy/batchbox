@@ -1,0 +1,102 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+input, textarea, select {margin: 0;}
+
+input.placeholder {font-size: 10px; color: #ccc;}
+
+input[type=text], textarea, select {
+box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+width: 100%;
+display: block;
+margin: 0;
+
+font-size: 14px;
+line-height: 16px;
+border: 1px solid #CCC;
+border-top: 1px solid #BBB;
+border-right: 1px solid #BBB;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #fff;
+}
+
+input[type=text],
+input[type=submit],
+input[type=button],
+textarea {
+padding: 8px;
+-webkit-appearance: none;
+}
+
+input[type=submit],
+input[type=button] {font-size: 13px; font-weight: normal; background-color: #fdfdfd; border: 1px solid #cbcbcb; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; cursor: pointer;}
+input[type=submit]:hover,
+input[type=button]:hover {background-color: #fff; color: #333;}
+
+input:focus, textarea:focus, select:focus {outline: none; background-color: #ffc;}
+
+body {background-color: #eee; color: #333; font-family: helvetica, sans-serif; font-size: 14px; padding: 4em;}
+h1 {padding: 20px 14px; font-size: 14px; background-color: #f2f2f2; border-top: 1px solid #fff; border-bottom: 1px solid #fff; text-shadow: #fff 1px 1px 0;}
+h2 {margin-bottom: 15px;}
+form {border: 1px solid #ccc; max-width: 600px;
+-moz-box-shadow: 0 2px 5px #CCC;
+-webkit-box-shadow: 0 2px 5px #CCC;
+box-shadow: 0 2px 5px #CCC;
+}
+.fields {background-color: #fff; padding: 1em; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;}
+.buttons {background-color: #ffc; padding: 1em;}
+
+
+
+
+.batchbox {border-top: 1px solid #ddd; border-collapse: separate; width: 100%; background-color: #ddd;}
+table.batchbox-with-headings,
+table.empty-batchbox {border-top: none;}
+.batchbox th,
+.batchbox td {text-align: left; vertical-align: middle;}
+.batchbox th {font-size: 12px; padding: 9px; background-color: #fff; border-bottom: 1px solid #ddd;}
+table.empty-batchbox th {border-bottom: none;}
+.batchbox tfoot td {padding: 5px; padding-left: 0; background-color: #fff;}
+.batchbox td:last-child {padding-right: 0;}
+.batchbox tbody td {border-top: 1px solid #fff; border-bottom: 1px solid #ddd; background-color: #f2f2f2;}
+.batchbox tbody td:first-child {border-left: 1px solid #ddd;}
+.batchbox tbody td:last-child {border-right: 1px solid #ddd; text-align: center;}
+.batchbox tbody .ui-sortable-helper td,
+.batchbox tbody .ui-sortable-helper td:first-child,
+.batchbox tbody .ui-sortable-helper td:last-child {border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;}
+
+.batchbox input {font-size: 12px;}
+.batchbox tbody input {border: none; border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0; background-color: #f2f2f2; padding: 8px 9px; margin-bottom: 1px;}
+.batchbox tbody input:focus {/*background-color: #ffc;*/}
+
+.batchbox td.controls {padding: 0; vertical-align: top; text-align: center; width: 0;}
+.batchbox .ui-sortable td.controls {vertical-align: middle;}
+.batchbox .inner {position: relative;}
+.batchbox .handle {background-image: url(drag.png); background-repeat: no-repeat; background-position: 9px center; cursor: move; cursor: grab; cursor: -moz-grab; cursor: -webkit-grab; padding-left: 5px; display: block;}
+.batchbox .ui-sortable-helper .handle {cursor: grabbing; cursor: -moz-grabbing; cursor: -webkit-grabbing;}
+.batchbox span.delete {cursor: pointer; position: absolute; top: -8px; right: -8px; display: block; width: 16px; height: 16px; text-align: center; line-height: 16px; background-color: #222; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; color: #fff; font-size: 11px; box-shadow: 0 0 10px #333; display: none;}
+.batchbox .ui-sortable span.delete {top: -17px;}
+.batchbox tr:hover span.delete {display: block;}
