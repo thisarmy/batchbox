@@ -6,7 +6,7 @@ TODO:
 * add, delete events
 */
 $.fn.batchbox = function(options, data) {
-    if (options == 'serialize') {
+    if (options == 'dump') {
         var settings = $(this).data('settings');
         if (!settings) {
             return;
@@ -30,7 +30,10 @@ $.fn.batchbox = function(options, data) {
             }
             rows.push(row);
         });
-        return JSON.stringify(rows);
+        return rows;
+    }
+    if (options == 'serialize') {
+        return JSON.stringify($(this).batchbox('dump'));
     }
 
     var settings = {
