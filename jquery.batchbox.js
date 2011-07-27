@@ -299,7 +299,6 @@ $.fn.batchbox = function(options, data) {
 
         // add
         var $tr = addRow(row);
-        $table.trigger('batchbox:add', [$tr, row]);
 
         // clear
         $tfoot.find('input[type=text]').val('');
@@ -308,6 +307,9 @@ $.fn.batchbox = function(options, data) {
         // (is this absolutely necessary?)
         $tfoot.find('input[type=text]').placeholder('refresh');
 
+        // notify
+        $table.trigger('batchbox:add', [$tr, row]);
+
         toggleEmpty();
 
         return false;
@@ -315,6 +317,7 @@ $.fn.batchbox = function(options, data) {
     $add.click(add);
     $tfoot.find('input[type=text]').keypress(function(event) {
         if (event.keyCode == 13) {
+            $(this).blur();
             add();
             return false;
         }
