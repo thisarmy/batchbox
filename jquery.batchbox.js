@@ -1,7 +1,7 @@
 (function($) {
 /*
 TODO:
-* support for images
+* support for images, arbitrary html
 * navigate up/down arrow key support for spreadsheet-like behaviour
 * add, delete events
 */
@@ -44,7 +44,9 @@ $.fn.batchbox = function(options, data) {
         addLabel: 'Add',       // for the single add button
         handleLabel: '&nbsp;', // for the <span class="handle"></span> contents
         deleteLabel: 'delete', // for the <span class="delete"></span> contents
+        addFromTop: false,     // add form fields in thead as opposed to tfoot.
         headings: false,       // also add a thead at the start
+                               // (only applies when adding from below)
         sortable: true,        // add handles and invoke .sortable() on tbody
         validate: null         // see defaultValidate() below
     };
@@ -146,10 +148,15 @@ $.fn.batchbox = function(options, data) {
     var $table = $('<table></table>');
     $table.attr('id', settings.name);
     $table.attr('class', settings['class']);
+
+    // the thead only exists if we're adding from the top or we use headings.
     var $thead = null;
-    if (settings.headings) {
-        $table.addClass(settings.name+'-with-headings');
+    if (settings.addFromTop) {
         $thead = $('<thead></thead>');
+        $table.append($thead);
+
+    } else if (settings.headings) {
+        $table.addClass(settings.name+'-with-headings');
         $table.append($thead);
         var $tr = $('<tr></tr>');
         for (var j in settings.fields) {
@@ -163,10 +170,10 @@ $.fn.batchbox = function(options, data) {
         $tr.append($th);
         $thead.append($tr);
     }
+
+    // existing/new data rows go in the tbody
     var $tbody = $('<tbody></tbody>');
     $table.append($tbody);
-    var $tfoot = $('<tfoot></tfoot>');
-    $table.append($tfoot);
 
     function toggleEmpty() {
         /*
@@ -189,8 +196,8 @@ $.fn.batchbox = function(options, data) {
     }
     toggleEmpty();
 
-    // add the fields for adding a new row to the footer.
-    var $tr = $('<tr></tr>');
+    // add the fields for adding a new row to the header or footer.
+    var $tr = $('<tr class="add"></tr>');
     for (var j in settings.fields) {
         var field = settings.fields[j];
         var $td = $('<td></td>');
@@ -213,10 +220,21 @@ $.fn.batchbox = function(options, data) {
     $add.val(settings.addLabel);
     $td.append($add);
     $tr.append($td);
-    $tfoot.append($tr);
+
+    // tfoot only exists if we're adding from the bottom
+    var $tfoot = null;
+    if (settings.addFromTop) {
+        $thead.append($tr);
+    } else {
+        $tfoot = $('<tfoot></tfoot>');
+        $table.append($tfoot);
+        $tfoot.append($tr);
+    }
+
     $container.append($table);
 
-    $container.find('tfoot input[type=text]').placeholder();
+    var $addrow = $container.find('tr.add');
+    $container.find('tr.add input[type=text]').placeholder();
 
     if (settings.sortable) {
         /*
@@ -301,11 +319,11 @@ $.fn.batchbox = function(options, data) {
         var $tr = addRow(row);
 
         // clear
-        $tfoot.find('input[type=text]').val('');
+        $addrow.find('input[type=text]').val('');
 
         // jquery.placeholder.js support
         // (is this absolutely necessary?)
-        $tfoot.find('input[type=text]').placeholder('refresh');
+        $addrow.find('input[type=text]').placeholder('refresh');
 
         // notify
         $table.trigger('batchbox:add', [$tr, row]);
@@ -315,7 +333,7 @@ $.fn.batchbox = function(options, data) {
         return false;
     }
     $add.click(add);
-    $tfoot.find('input[type=text]').keypress(function(event) {
+    $addrow.find('input[type=text]').keypress(function(event) {
         if (event.keyCode == 13) {
             $(this).blur();
             add();
