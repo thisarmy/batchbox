@@ -216,7 +216,8 @@ $.fn.batchbox = function(options, data) {
         $tr.append($td);
     }
     var $td = $('<td></td>');
-    var $add = $('<input type="button" class="add">');
+    var $add = $('<input type="button" name="'+settings.name+
+        '-addButton" class="add">');
     $add.val(settings.addLabel);
     $td.append($add);
     $tr.append($td);
